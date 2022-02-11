@@ -23,6 +23,8 @@ public class ConfigReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
 
@@ -30,5 +32,6 @@ public class ConfigReader {
 
         return properties.getProperty(key);
     }
+
 
 }
