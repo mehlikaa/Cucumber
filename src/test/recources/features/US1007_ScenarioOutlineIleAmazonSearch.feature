@@ -1,18 +1,19 @@
+Feature: US1007 Scenario Outline ile amazon search
 
-  Feature: US1007 Scenario Outline Ile Amazon Search
+  Scenario Outline: TC12 amazonda bir listedeki tum elementleri aratma
 
-    Scenario Outline: TC12 amazonda bir listedeki tum elementleri aratma
-
-      Given kullanici "AmazonUrl" sayfasina gider
-      Then "<aranacakEleman>" icin arama yapar
-      And sonuclarin "<aranacakEleman>" icerdigini test eder
+    Given kullanici "AmazonUrl" sayfasina gider
+    Then "<aranacakEleman>" icin arama yapar
+    And sonuclarin "<aranacakEleman>" icerdigini test eder
 
 
-      Examples:
+
+
+
+    Examples:
       |aranacakEleman|
       |Apple|
-      |Java|
+      |Java |
+      |Samsung|
+      |Armut  |
       |nutella|
-      |nutella|
-
-      And sayfayi kapatir
