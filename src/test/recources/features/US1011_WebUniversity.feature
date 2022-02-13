@@ -1,20 +1,23 @@
-Feature: US1011 Web University Window Handle
+@WebU
+Feature: US1011 WebUniversity Window Handle
 
-  Scenario Outline: TC16 Reusable Methods ila Window Handle Testi
+  Scenario Outline: TC16 Reusable Methods ile window Handle Testi
 
     Given kullanici "WebUniversityUrl" sayfasina gider
-    And Login Portala  kadar asagi iner
-    And Login Portala tiklar
-    Then Acilan diger window'a gecer
-    And "<username>" ve  "<password>" kutularina deger yazdirir
+    And Login Portal'a  kadar asagi iner
+    And 2 saniye bekler
+    And Login Portal'a  tiklar
+    Then acilan Diger window'a gecer
+    And "<username>" ve  "<password>" kutularina deger yazdirin
     And WebUniversity Login butonuna basar
+    And 2 saniye bekler
     And Popup'ta cikan yazinin "validation failed" oldugunu test eder
     Then Ok diyerek Popup'i kapatir
     And Ilk sayfaya geri doner
-    Then Ilk sayfaya donuldugunu test eder
-
-
+    And Ilk sayfaya donuldugunu test eder
+    And sayfayi kapatir
 
     Examples:
-    |username|password|
-    |Mustafa  |Donat  |
+
+      |username|password|
+      |Mustafa |Donat   |

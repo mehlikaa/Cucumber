@@ -10,16 +10,16 @@ public class WebUniversityPage {
     public WebUniversityPage(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
-
-    @FindBy(id = "login-portal")
+    @FindBy(xpath = "(//div[@class='section-title'])[2]")
     public WebElement webUniversityLoginPortal;
 
     @FindBy(xpath = "//input[@id='text']")
-    public WebElement webUniversityUserNameButton;
+    public WebElement webUniversityUserNameBox;
 
     @FindBy(xpath = "//input[@id='password']")
-    public WebElement webUniversityPasswordButton;
+    public WebElement webUniversityPasswordBox;
 
     @FindBy(xpath = "//button[@id='login-button']")
     public WebElement webUniversityLoginButton;
+
 }
