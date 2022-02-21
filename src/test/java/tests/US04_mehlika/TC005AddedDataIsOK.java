@@ -2,7 +2,7 @@ package tests.US04_mehlika;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.US04_HotelEkle;
+import pages.US0004_AddHotel;
 import utilities.Driver;
 import utilities.ReusableMethods;
 import utilities.TestBaseRapor;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class TC005AddedDataIsOK extends TestBaseRapor {
 
-    US04_HotelEkle hmcp_us04=new US04_HotelEkle();
+    US0004_AddHotel addHotel=new US0004_AddHotel();
     TC003SaveHotel saveHotel=new TC003SaveHotel();
     TC04SaveOK saveOK=new TC04SaveOK();
     //TakesScreenshot tss=(TakesScreenshot) Driver.getDriver();
@@ -23,27 +23,26 @@ public class TC005AddedDataIsOK extends TestBaseRapor {
         saveHotel.TC003saveHotelTest();
         extentTest=extentReports.createTest("saved Hotel Name Check","Otel eklenebilmis mi kontrol edildi");
 
-        //TC001Login login=new TC001Login();
-        //login.login();
         Driver.getDriver().get("https://www.hotelmycamp.com/admin/HotelAdmin");
         String firstPageHandle=Driver.getDriver().getWindowHandle();
         extentTest.info(" Birinci sayfa Handle degeri bir stringe atandi");
 
-        Assert.assertTrue(hmcp_us04.listOfHotelsText.isDisplayed());
+        Assert.assertTrue(addHotel.listOfHotelsText.isDisplayed());
         extentTest.pass("List Of Hotels Sayfasinda olup olmadigimiz kontrol edildi. ");
 
-        hmcp_us04.listOfHotelsNameSearch.click();
+        addHotel.listOfHotelsNameSearch.click();
+        ReusableMethods.waitFor(2);
         System.out.println("saveHotel.fakerNameText : "+saveHotel.fakerNameText);
-        hmcp_us04.listOfHotelsNameSearch.sendKeys(saveHotel.fakerNameText);
-        hmcp_us04.listOfHotelsCodeSearch.sendKeys(saveHotel.fakerCodeText);
+        addHotel.listOfHotelsNameSearch.sendKeys(saveHotel.fakerNameText);
+        addHotel.listOfHotelsCodeSearch.sendKeys(saveHotel.fakerCodeText);
         extentTest.info("Arama icin Code Name bilgileri girildi");
 
-        hmcp_us04.listOfHotelsSearchButton.click();
-        String actualSearchName=hmcp_us04.searchNameTableCell.getText();
+        addHotel.listOfHotelsSearchButton.click();
+        String actualSearchName=addHotel.searchNameTableCell.getText();
         String expectedSearchName=saveHotel.fakerNameText;
         System.out.println("hmcp_us04.searchNameTableCell.getText() : "+actualSearchName+"\nsaveHotel.fakerNameText  : "+expectedSearchName);
            ReusableMethods.waitFor(2);
-        hmcp_us04.detailsButton.click();
+        addHotel.detailsButton.click();
 
         Set<String> handleSet=Driver.getDriver().getWindowHandles();
         String secondPageHandle = "";
@@ -55,23 +54,20 @@ public class TC005AddedDataIsOK extends TestBaseRapor {
         }
         Driver.getDriver().switchTo().window(secondPageHandle);
 
-        hmcp_us04.generalDataTab.click();
+        addHotel.generalDataTab.click();
 
-        String actualCodeData=hmcp_us04.savedCodeCheck.getText();
+        String actualCodeData=addHotel.savedCodeCheck.getText();
         String expectedCodeData=saveHotel.fakerNameText;
-        String actualNameData=hmcp_us04.savedCodeCheck.getText();
+        String actualNameData=addHotel.savedCodeCheck.getText();
         String expectedNameData=saveHotel.fakerNameText;
-        System.out.println("------\nactualCodeData : "+hmcp_us04.savedCodeCheck.getText()+
+        System.out.println("------\nactualCodeData : "+addHotel.savedCodeCheck.getText()+
                                  "\nexpectedCodeData : "+saveHotel.fakerCodeText+
-                                "\nactualNameData : "+hmcp_us04.savedNameCheck.getText()+
+                                "\nactualNameData : "+addHotel.savedNameCheck.getText()+
                                 "\nexpectedNAmeData : "+saveHotel.fakerNameText);
         Assert.assertEquals(actualCodeData,expectedCodeData,"Yanlis Kayit Code'u ");
         Assert.assertEquals(actualNameData,expectedNameData,"Yanlis Kayit Name'i ");
         extentTest.pass("Eklenen Hotel bilgileri Code ve Name ile kontrol edildi.");
 
-//        File screenShots=new File("src/images/TC005photos");
-//        File geciciResim=tss.getScreenshotAs(OutputType.FILE);
-//        FileUtils.copyFile(geciciResim,screenShots);
         ReusableMethods.getScreenshot("TC005");
         extentTest.info("Son ekranin fotografi kaydedildi.");
 

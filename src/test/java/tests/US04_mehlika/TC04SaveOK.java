@@ -5,9 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.US04_HotelEkle;
+import pages.US0004_AddHotel;
 import utilities.Driver;
+import utilities.ReusableMethods;
 import utilities.TestBaseRapor;
 
 import java.io.File;
@@ -15,7 +17,7 @@ import java.io.IOException;
 
 public class TC04SaveOK extends TestBaseRapor {
 
-    US04_HotelEkle hmcp_us04=new US04_HotelEkle();
+    US0004_AddHotel addHotel=new US0004_AddHotel();
     TC003SaveHotel tc003SaveHotel=new TC003SaveHotel();
     TakesScreenshot tss=(TakesScreenshot) Driver.getDriver();
 
@@ -24,24 +26,26 @@ public class TC04SaveOK extends TestBaseRapor {
 
         tc003SaveHotel.TC003saveHotelTest();
 
-        String actualSuccessfullyText=hmcp_us04.insertedSuccessfullyText.getText();
-                                    //Driver.getDriver().switchTo().alert().getText();
+        String actualSuccessfullyText=addHotel.insertedSuccessfullyText.getText();
         System.out.println(" actualSuccessfullyText : "+ actualSuccessfullyText);
         String expectedSuccessfullyText="Hotel was inserted successfully";
-        WebElement tiklaKapat=Driver.getDriver().findElement(By.xpath("//button[@type='button'])[5]')"));
-        tiklaKapat.click();
-        //Driver.getDriver().switchTo().alert().dismiss();
-        //Assert.assertEquals(actualSuccessfullyText,expectedSuccessfullyText,"Dogru kayit yapilamamistir.");
-        //Assert.assertTrue(hmcp_us04.saveSuccessfullyOkButton.isDisplayed(),"Successfully Ok tiklanamadi");
+        Assert.assertTrue(actualSuccessfullyText.contains("successfully"));
+        Assert.assertEquals(actualSuccessfullyText,expectedSuccessfullyText,"Successfully yazisi gorulemedi");
 
+        Assert.assertTrue(addHotel.insertedSuccessfullyText.isDisplayed());
+//        String expectedSuccessfullyText = "Hotel was inserted successfully";
+//        System.out.println("expectedSuccessfullyText : "+expectedSuccessfullyText);
+        Thread.sleep(2000);
 
-        hmcp_us04.saveSuccessfullyOkButton.click();
+        addHotel.saveSuccessfullyOkButton.click();
+
+        Thread.sleep(1000);
+        //ReusableMethods.waitForVisibility(addHotel.saveSuccessfullyOkButton,8);
 
         File screenShots=new File("src/images/TC004photo.jpg");
         File geciciResim=tss.getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(geciciResim,screenShots);
         extentTest.info("Son ekranin fotografi kaydedildi.");
+
     }
-
-
 }

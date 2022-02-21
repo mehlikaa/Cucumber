@@ -5,9 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class US04_HotelEkle {
+public class US0004_AddHotel {
 
-    public US04_HotelEkle(){
+    public US0004_AddHotel(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
